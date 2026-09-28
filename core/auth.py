@@ -12,7 +12,7 @@ def verify_password(password:str, hashed:str)->bool:
 
 def register(full_name,email,password):
     count=int(scalar("select count(*) from users", default=0) or 0)
-    role='admin' if count==0 else 'operator'
+    role='admin' if count==0 else 'viewer'
     return execute("insert into users(full_name,email,password_hash,role) values(%s,%s,%s,%s)", (full_name.strip(),email.strip().lower(),hash_password(password),role))
 
 def login(email,password):
